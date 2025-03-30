@@ -138,8 +138,6 @@ client.on('interactionCreate', async interaction => {
             return;
         }
 
-        const member = await interaction.guild.members.fetch(interaction.user.id);
-
         if (!interaction.memberPermissions.has("Administrator")) {
             await interaction.reply(
                 'You need to have administrator permissions to use this command.'
