@@ -145,8 +145,8 @@ client.on('interactionCreate', async interaction => {
             return;
         }
 
-        const channel = interaction.channel;
-        await db.set(`channel_${interaction.guildId}`, channel.id);
+        const channel = interaction.channelId;
+        await db.set(`channel_${interaction.guildId}`, channel);
         await interaction.reply(`This channel has been set for Fact Sphere quotes!`);
     }
 });
