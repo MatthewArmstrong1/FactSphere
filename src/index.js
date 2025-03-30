@@ -112,14 +112,14 @@ client.once('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     // Schedule the message at midday (12:00 PM)
-    cron.schedule('30 12 * * *', async () => {
+    cron.schedule('0 13 * * *', async () => {
         const guilds = client.guilds.cache;
+        const randomQuote = FACT_SPHERE_QUOTES[Math.floor(Math.random() * FACT_SPHERE_QUOTES.length)];
         for (const [guildId, guild] of guilds) {
             const channelId = await db.get(`channel_${guildId}`);
             if (channelId) {
                 const channel = client.channels.cache.get(channelId);
                 if (channel) {
-                    const randomQuote = FACT_SPHERE_QUOTES[Math.floor(Math.random() * FACT_SPHERE_QUOTES.length)];
                     channel.send(randomQuote);
                 }
             }
@@ -133,13 +133,13 @@ client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
 
     if (interaction.commandName === 'setchannel') {
-        if (!interaction.guild) {
+        if (!interaction.member) {
             await interaction.reply('This command can only be used in a server.');
             return;
         }
 
         // Check permissions correctly
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+        if (!interaction.member.permissions.has('Administrator')) {
             await interaction.reply(
                 'You need to have administrator permissions to use this command.'
             );
