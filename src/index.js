@@ -112,7 +112,7 @@ client.once('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     // Schedule the message at midday (12:00 PM)
-    cron.schedule('5 17 * * *', async () => {
+    cron.schedule('0 12 * * *', async () => {
         const guilds = client.guilds.cache;
         const randomQuote = FACT_SPHERE_QUOTES[Math.floor(Math.random() * FACT_SPHERE_QUOTES.length)];
         for (const [guildId, guild] of guilds) {
@@ -125,7 +125,7 @@ client.once('ready', async () => {
             }
         }
     }, {
-        timezone: "Etc/UTC"
+        timezone: "Europe/London"
     });
 });
 
