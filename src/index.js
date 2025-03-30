@@ -133,7 +133,13 @@ client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
 
     if (interaction.commandName === 'setchannel') {
-        if (!interaction.member.permissions.has('Administrator')) {
+        if (!interaction.guild) {
+            await interaction.reply('This command can only be used in a server.');
+            return;
+        }
+
+        // Check permissions correctly
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             await interaction.reply(
                 'You need to have administrator permissions to use this command.'
             );
