@@ -112,7 +112,7 @@ client.once('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
     // Schedule the message at midday (12:00 PM)
-    cron.schedule('0 12 * * *', async () => {
+    cron.schedule('30 12 * * *', async () => {
         const guilds = client.guilds.cache;
         for (const [guildId, guild] of guilds) {
             const channelId = await db.get(`channel_${guildId}`);
