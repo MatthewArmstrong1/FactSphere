@@ -110,7 +110,7 @@ const FACT_SPHERE_QUOTES = [
 
 client.once('ready', async () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    
+
     // Schedule the message at midday (12:00 PM)
     cron.schedule('0 12 * * *', async () => {
         const guilds = client.guilds.cache;
@@ -134,10 +134,9 @@ client.on('interactionCreate', async interaction => {
 
     if (interaction.commandName === 'setchannel') {
         if (!interaction.member.permissions.has('Administrator')) {
-            await interaction.reply({
-                content: 'You need to have administrator permissions to use this command.',
-                ephemeral: true
-            });
+            await interaction.reply(
+                'You need to have administrator permissions to use this command.'
+            );
             return;
         }
 
